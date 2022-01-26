@@ -9,19 +9,17 @@ import fun.kolowert.labmodules.m2.model.User;
 
 @Component
 public class UserRepositoryImpl implements UserRepository {
-	
+
 	private final List<User> list = new ArrayList<>();
-	
+
 	public UserRepositoryImpl() {
 		fillList();
 	}
-	
+
 	@Override
 	public User getUser(String email) {
 		// TODO Auto-generated method stub
-		return list.stream()
-				.filter(user -> user.getEmail().equals(email))
-				.findFirst()
+		return list.stream().filter(user -> user.getEmail().equals(email)).findFirst()
 				.orElseThrow(() -> new RuntimeException("User is not found!"));
 	}
 
@@ -46,9 +44,12 @@ public class UserRepositoryImpl implements UserRepository {
 	public void deleteUser(String email) {
 		list.removeIf(u -> u.getEmail().equals(email));
 	}
-	
+
 	private void fillList() {
-		
+		list.add(User.builder().firstName("Arnold").lastName("Doubledark").email("arny@hollywood.fun")
+				.password("234568").build());
+		list.add(User.builder().firstName("Chack").lastName("Siron").email("chacky@hollywood.fun").password("845632")
+				.build());
 	}
-	
+
 }
